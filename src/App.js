@@ -1,9 +1,9 @@
 import './App.css';
-import PCStats from './components/pcStats';
+import CharSheet from './components/subcomponents/charSheet';
 
 function App() {
   return (
-    <PCStats/>
+    <CharSheet/>
   );
 }
 
