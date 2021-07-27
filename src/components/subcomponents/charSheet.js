@@ -16,16 +16,20 @@ class charSheet extends Component{
       cha: 0,
       ac: 0,
 
-      level: 0,
+      level: 1,
+
       //Dependent stats
       carryCap: null,
       proficiency: null,
-      inspiration: null,
       speed: null,
       passPerception: null,
       passInsight: null,
       curHP: 0,
       tempHP: 0,
+
+      //Other stats
+      inspiration: null,
+      skills[]: null,
 
       //Functional variables
       showOptions : "false",
@@ -142,6 +146,52 @@ class charSheet extends Component{
    this.setStat(this.roll(dice, sides, dl), 'cha');
   }
 
+  generateDerivativeStats(){
+    var armorClass = 10;
+    var passivePerception = 10;
+    var passiveInsight = 10;
+
+  }
+
+  addSkill(skill){
+    var temp = this.state.skills;
+    temp.push(skill);
+    this.setState({skills: temp});
+  }
+
+  skills(){
+    skillList = this.state.skills;
+    skillRender[];
+    for(let skill of skillList){
+      skillRender.push(<li key={skill}>{skill} +2</li>);
+    }
+    this.setState({skills: skillRender};
+      // Add way to input skills, and display them in a variable manner
+      // (probably with a custom render object)
+  }
+
+  characterTraits(){
+    return(
+      <div>
+      //Name, level, class, Paragon path, Epic destiny, total XP,
+      //Race, Size, Age, Sex, Height, Weight, Alignment, Deity
+      <input type="text" name='nameIn' onChange={this.handleChange}/>
+      <input list="Alignment" name='alignmentIn' onChange={this.handleClick}/>
+
+      <datalist id="Alignment">
+        <option value="Lawful Good">
+        <option value="Neutral Good">
+        <option value="Chaotic Good">
+        <option value="Lawful Neutral">
+        <option value="True Neutral">
+        <option value="Chaotic Neutral">
+        <option value="Lawful Evil">
+        <option value="Neutral Evil">
+        <option value="Chaotic Evil">
+      </datalist>
+      </div>
+    );
+  }
 
   render(){
     return(
@@ -152,19 +202,21 @@ class charSheet extends Component{
           {this.state.showOptions == 'true' ?
             <div>
             <button name='3d6' onClick={this.handleStatRolls}>3d6</button>
-            <button>d20</button>
-            <button>4d6 drop lowest</button>
+            <button name='d20' onClick={this.handleStatRolls}>d20</button>
+            <button name='4d6dl' onClick={this.handleStatRolls}>4d6 drop lowest</button>
             </div>
             : <div/>
           }
           </div>
       </div>
-    <p>Strength: {this.state.str}</p>
-    <p>Dexterity: {this.state.dex}</p>
-    <p>Constitution: {this.state.con}</p>
-    <p>Intelligence: {this.state.int}</p>
-    <p>Wisdom: {this.state.wis}</p>
-    <p>Charisma: {this.state.cha}</p>
+        <div>
+        <p>Strength: {this.state.str}</p>
+        <p>Dexterity: {this.state.dex}</p>
+        <p>Constitution: {this.state.con}</p>
+        <p>Intelligence: {this.state.int}</p>
+        <p>Wisdom: {this.state.wis}</p>
+        <p>Charisma: {this.state.cha}</p>
+        </div>
     </div>
   );
   }
